@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Állathangok</title>
+        <link rel="stylesheet" href="css/main.css" type="text/css"/>
+    </head>
+
+    <body >
+        <h1>Állathangok</h1>
+        <p class="tagline"></p>
+        <script type="text/javascript">
+
+         var imlocation = "images/";
+         var currentdate = 0;
+         var image_number = 0;
+         function ImageArray (n) {
+           this.length = n;
+           for (var i =1; i <= n; i++) {
+             this[i] = ' '
+           }
+         }
+
+         //images_selected = new ImageArray(3)
+         images_selected = new ImageArray(3)
+         image = new ImageArray(16)
+         image[0] = 'birka'
+         image[1] = 'boci'
+         image[2] = 'lo'
+         image[3] = 'malac'
+         image[4] = 'tyuk'
+         image[5] = 'oroszlan'
+         image[6] = 'bagoly'
+         image[7] = 'beka'
+         image[8] = 'csirke'
+         image[9] = 'darazs'
+         image[10] = 'elefant'
+         image[11] = 'farkas'
+         image[12] = 'kacsa'
+         image[13] = 'kakas'
+         image[14] = 'kutya'
+         image[15] = 'macska'
+
+         var rand = 1000/image.length
+
+         function checkExists(n) {
+            var exists = 0;
+            for(var i = 0; i<images_selected.length;i++){
+                if(images_selected[i] == image[n]){
+                    exists = 1;
+                }
+            }
+            return exists
+         }
+
+         function nextImageNumber(n){
+             //document.write ('N'+n)
+             var newNumber = ++n
+
+             if(n>image.length-1){
+                 newNumber = 0;
+             }
+             //document.write ('NewN'+newNumber)
+             return newNumber
+         }
+
+         function randomimage1() {
+
+             image_number = Math.floor((Math.random()*image.length))
+            //document.write (image_number)
+             do{
+                image_number = nextImageNumber(image_number)
+         	}
+             while(checkExists(image_number) == 1)
+
+             images_selected[0] = image[image_number]
+            //document.write (image_number)
+             return images_selected[0]
+         }
+
+         function randomimage2() {
+
+             image_number = Math.floor((Math.random()*image.length))
+                do{
+                image_number = nextImageNumber(image_number)
+         	}
+             while(checkExists(image_number) == 1)
+
+             images_selected[1] = image[image_number]
+             //document.write (image_number)
+             return images_selected[1]
+         }
+
+        function randomimage3() {
+
+            image_number = Math.floor((Math.random()*image.length))
+                do{
+                image_number = nextImageNumber(image_number)
+             }
+             while(checkExists(image_number) == 1)
+
+             images_selected[2] = image[image_number]
+             //document.write (image_number)
+             return images_selected[2]
+         }
+
+        function getrandsound()
+        {
+            image_number = Math.floor((Math.random()*images_selected.length))
+            return images_selected[image_number]
+        }
+
+
+        document.write("<img width=400 height=300 src='" + imlocation + randomimage1()+ ".jpg'>");
+        document.write("<img width=400 height=300 src='" + imlocation + randomimage2()+ ".jpg'>");
+        document.write("<img width=400 height=300 src='" + imlocation + randomimage3()+ ".jpg'>");
+        var hang = getrandsound()
+
+        document.write("<audio id='player' autoplay='autoplay' src='sounds/"+hang+".wav'>HTML5 audio not supported</audio>");
+        //document.write(hang)
+
+
+         </script>
+        <div>
+        <button onclick="document.getElementById('player').play()">Hang újrajátszása</button>
+        <input type="button" value="Következő" onClick="window.location.reload()">
+        </div>
+
+
+    </body>
+</html>
